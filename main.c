@@ -581,8 +581,8 @@ int main(){
             .m = {
                 f / aspect, 0, 0, 0,
                 0, f, 0, 0,
-                0, 0, far / (near - far), -1,
-                0, 0, (near * far) / (near - far), 0
+                0, 0, far / (near-far), -1,
+                0, 0, (near * far) / (near-far), 0
             }
         }
     };

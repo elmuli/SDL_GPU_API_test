@@ -20,10 +20,9 @@ void main()
     vec4 baseColor = texture(Sampler, fragTexCoord);
     vec4 color = testColor1 * diffuse_1 - testColor2 * diffuse_2;
 
-    outColor = baseColor;
+    //outColor = baseColor;
     //outColor = vec4(color.x, color.y, color.z, 1.0);
-    float depth = gl_FragCoord.z;
-    //outColor = vec4(vec3(gl_FragCoord.z), 1.0);
+    outColor = vec4(vec3(gl_FragCoord.z), 1.0);
     //outColor = vec4(fragNormal * 0.5 + 0.5, 1.0);
 
 }
