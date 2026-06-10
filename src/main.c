@@ -47,7 +47,7 @@ SDL_GPUBuffer* vertexBuffers[5];
 SDL_GPUShader* LoadTexture(SDL_GPUDevice *device, const char *filePath, SDL_GPUShaderStage stage){
     FILE *file = fopen(filePath, "rb");
     if(!file){
-        printf("[ERROR]: could not open file: %s", filePath);
+        printf("[ERROR]: could not open file: %s\n", filePath);
         return 0;
     }
 
@@ -73,7 +73,7 @@ SDL_GPUShader* LoadTexture(SDL_GPUDevice *device, const char *filePath, SDL_GPUS
 
     SDL_GPUShader *shader = SDL_CreateGPUShader(device, &createInfo);
     if (!shader) {
-        SDL_Log("Failed to create shader: %s", SDL_GetError());
+        SDL_Log("Failed to create shader: %s\n", SDL_GetError());
     }
 
     free(source);
@@ -299,7 +299,7 @@ int main(){
         printf("SDL_SetGPUSwapchainParameters failed: %s\n", SDL_GetError());
     }
 
-    SDL_Surface *textureSurface_ = SDL_LoadBMP("texture.bmp");
+    SDL_Surface *textureSurface_ = SDL_LoadBMP("assets/textures/texture.bmp");
     if(!textureSurface_){
         printf("[ERROR]: Could not load texture.png\n");
         return -1;
@@ -414,10 +414,10 @@ int main(){
 
     printf("Sampler created\n");
 
-    Meshes[0] = LoadObjFromFile("ship.obj",(Vec3){0.0f, 0.0f, 15.0f});
-    Meshes[1] = LoadObjFromFile("monkey.obj",(Vec3){0.0f, 0.0f, 15.0f});
-    Meshes[2] = LoadObjFromFile("ship_2.obj",(Vec3){0.0f, 0.0f, -15.0f});
-    Meshes[3] = LoadObjFromFile("sphere.obj",(Vec3){0.0f, 0.0f, -15.0f});
+    Meshes[0] = LoadObjFromFile("assets/ship.obj",(Vec3){0.0f, 0.0f, 15.0f});
+    Meshes[1] = LoadObjFromFile("assets/monkey.obj",(Vec3){0.0f, 0.0f, 15.0f});
+    Meshes[2] = LoadObjFromFile("assets/ship_2.obj",(Vec3){0.0f, 0.0f, -15.0f});
+    Meshes[3] = LoadObjFromFile("assets/sphere.obj",(Vec3){0.0f, 0.0f, -15.0f});
     Meshes[4] = CreateDefaultCube((Vec3){0.0f, -2.0f, 4.0f});
 
     printf("Meshes created\n");
@@ -464,8 +464,8 @@ int main(){
 
     printf("Verticles loaded\n");
 
-    SDL_GPUShader *vertShader = LoadTexture(gpuDevice, "vert.spv", SDL_GPU_SHADERSTAGE_VERTEX);
-    SDL_GPUShader *fragShader = LoadTexture(gpuDevice, "frag.spv", SDL_GPU_SHADERSTAGE_FRAGMENT);
+    SDL_GPUShader *vertShader = LoadTexture(gpuDevice, "shaders/vert.spv", SDL_GPU_SHADERSTAGE_VERTEX);
+    SDL_GPUShader *fragShader = LoadTexture(gpuDevice, "shaders/frag.spv", SDL_GPU_SHADERSTAGE_FRAGMENT);
 
     printf("Shaders loaded\n");
 
