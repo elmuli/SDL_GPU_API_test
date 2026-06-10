@@ -249,6 +249,25 @@ Mesh CreateDefaultCube(Vec3 pos){
     };
 }
 
+int HandleInput(CameraUBO *camera, const bool *keys){
+    SDL_PumpEvents();
+
+    if(keys[SDL_SCANCODE_W]){
+        camera->view.m[14] += 0.01f;
+    }
+    if(keys[SDL_SCANCODE_S]){
+        camera->view.m[14] -= 0.01f;
+    }
+    if(keys[SDL_SCANCODE_E]){
+        camera->view.m[12] -= 0.01f;
+    }
+    if(keys[SDL_SCANCODE_Q]){
+        camera->view.m[12] += 0.01f;
+    }
+
+    return 1;
+}
+
 int main(){
 
     SDL_Init(SDL_INIT_VIDEO);
@@ -627,6 +646,8 @@ int main(){
 
     printf("All setup done\n");
 
+    const bool *keys = SDL_GetKeyboardState(NULL);
+
     bool quit = false;
     SDL_Event event;
     float rotation;
@@ -640,7 +661,9 @@ int main(){
             }
         }
 
-        rotation += 0.0005f;
+        HandleInput(&cameraData, keys);
+
+        rotation += 0.0003f;
         float cos_y = cosf(rotation);
         float sin_y = sinf(rotation);
 
@@ -685,7 +708,7 @@ int main(){
                         cos_y,  0.0f, sin_y, 0.0f,
                         0.0f,   1.0f, 0.0f,  0.0f,
                         -sin_y,  0.0f, cos_y, 0.0f,
-                        0.0f, 0.0f, -120.0f, 1.0f
+                        0.0f, -15.0f, -100.0f, 1.0f
                     }
                 };
 
